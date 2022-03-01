@@ -14,7 +14,7 @@
 #include    "stdint.h"          // Include integer definitions
 #include    "stdbool.h"         // Include Boolean (true/false) definitions
 
-#include    "UBMP4.1.h"         // Include UBMP4.1 constant and function definitions
+#include    "UBMP410.h"         // Include UBMP4.1 constant and function definitions
 
 // TODO Set linker ROM ranges to 'default,-0-7FF' under "Memory model" pull-down.
 // TODO Set linker code offset to '800' under "Additional options" pull-down.
@@ -157,13 +157,13 @@ void pwm_LED5(unsigned char);
  *      variable definitions and the function prototypes for an associated C
  *      file which contains the actual function code.
  * 
- *      The '#include "UBMP4.h"' statement near the top of this program is an
+ *      The '#include "UBMP410.h"' statement near the top of this program is an
  *      example of a statement that adds external functions to our program. The
- *      'UBMP4.h' file contains function prototypes for functions located in
- *      the 'UBMP4.c' file, along with various symbolic constants used by both
- *      our program and the code in the UBMP4.c functions.
+ *      'UBMP410.h' file contains function prototypes for functions located in
+ *      the 'UBMP410.c' file, along with various symbolic constants used by both
+ *      our program and the code in the UBMP410.c functions.
  * 
- *      Open the UBMP4.c file to find the OSC_config() and UBMP4_config()
+ *      Open the UBMP410.c file to find the OSC_config() and UBMP4_config()
  *      functions called from the main() function in this program. Are any
  *      values passed between this code and the two setup functions? How do
  *      you know?
