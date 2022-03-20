@@ -1,6 +1,6 @@
 /*==============================================================================
  Project: Intro-4-Functions
- Date:    March 1, 2022
+ Date:    March 18, 2022
  
  This program demonstrates the use of functions, and variable passing between
  the main and function code.
@@ -28,7 +28,7 @@ const char DOWN = 2;
 unsigned char LED5Brightness = 125;
 unsigned char button;
 
-unsigned char button_pressed(void)
+unsigned char read_button(void)
 {
     if(SW4 == 0)
     {
@@ -69,7 +69,7 @@ int main(void)
     while(1)
 	{
         // Read up/down buttons and adjust LED5 brightness
-        button = button_pressed();
+        button = read_button();
         
         if(button == UP && LED5Brightness < 255)
         {
@@ -100,10 +100,10 @@ int main(void)
  * 1.   Which function in this program will run first? How do you know?
  * 
  * 2.   What is the purpose of the 'unsigned char' variable type declaration in
- *      the button_pressed() function? Is it used by this function to receive
+ *      the read_button() function? Is it used by this function to receive
  *      a variable from, or return a variable to the main code?
  * 
- * 3.   How does the function call statement 'button = button_pressed();' in the
+ * 3.   How does the function call statement 'button = read_button();' in the
  *      main code support your answer in 2, above?
  * 
  * 4.   What is the purpose of the 'unsigned char' variable type declaration in
@@ -112,14 +112,14 @@ int main(void)
  * 
  * 5.   C language compilers typically read through the entire program in a
  *      single pass, converting C code into machine code. The two functions,
- *      button_pressed() and pwm_LED5(), are located above the main() function
+ *      read_button() and pwm_LED5(), are located above the main() function
  *      so that their memory locations and variable requirements will be
  *      determined before the rest of the program compiles. When the compiler
  *      interprets the function call statements in the main code, it already
  *      knows where those functions are be in memory and which memory locations
  *      are used by their variables.
  * 
- *      Try moving the button_pressed() and pwm_LED5() functions to below the
+ *      Try moving the read_button() and pwm_LED5() functions to below the
  *      closing brace of the main() function, and build the code. What happens?
  * 
  *      The compiler should have reported an error since it did not understand
@@ -134,10 +134,10 @@ int main(void)
  * 
  *      Let's try this out. Leave the functions in their new location, below
  *      the main() function, and add the two function prototypes (shown below)
- *      above main(), in the location where the functions were originally
- *      located:
+ *      above the main() function, in the location where the functions were
+ *      originally located:
 
-unsigned char button_pressed(void);
+unsigned char read_button(void);
 
 void pwm_LED5(unsigned char);
 
@@ -154,8 +154,8 @@ void pwm_LED5(unsigned char);
  * 
  *      Function libraries are typically joined to your project's main '.c' file
  *      using an 'include' statement to a '.h' header file containing both
- *      variable definitions and the function prototypes for an associated C
- *      file which contains the actual function code.
+ *      variable definitions and the function prototypes for the associated C
+ *      files which contain the actual function code.
  * 
  *      The '#include "UBMP410.h"' statement near the top of this program is an
  *      example of a statement that adds external functions to our program. The
@@ -185,8 +185,8 @@ void pwm_LED5(unsigned char);
  *      and DOWN buttons are held to change the PWM duty cycle. But, PWM dimming
  *      dimming capability is still a useful feature that should be retained.
  * 
- *      Modify the button_pressed() and main() functions to use SW3 as an
- *      instant on button, and SW2 as an instant off button. Pressing either of
+ *      Modify the read_button() and main() functions to use SW3 as an
+ *      instant-on button, and SW2 as an instant-off button. Pressing either of
  *      these buttons will over-write the current LED5Brightness value with
  *      either 255 or 0, while still allowing SW4 and SW5 to adjust the
  *      brightness in smaller increments when pressed.
@@ -207,5 +207,6 @@ void pwm_LED5(unsigned char);
  *      of the binary number passed to it. For example, passing the function
  *      a value of 142 will result in the hundreds variable containing the
  *      value 1, the tens variable containing 4, and the ones variable 2. How
- *      could you test this function to verify that it works? Try it!
+ *      could you test this function to verify that it works? Try it! (Hint:
+ *      the BCD number system represents the decimal digits 0-9 using 4 bits.)
  */
