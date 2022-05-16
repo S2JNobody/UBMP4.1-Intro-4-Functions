@@ -12,7 +12,7 @@ variables.
 #include    "stdint.h"          // Include integer definitions
 #include    "stdbool.h"         // Include Boolean (true/false) definitions
  
-#include    "UBMP4.h"           // Include UBMP4 constants and functions
+#include    "UBMP410.h"           // Include UBMP4 constants and functions
  
 // TODO Set linker ROM ranges to 'default,-0-7FF' under "Memory model" pull-down.
 // TODO Set linker code offset to '800' under "Additional options" pull-down.
@@ -21,6 +21,8 @@ variables.
 const char noButton = 0;
 const char UP = 1;
 const char DOWN = 2;
+const char ON = 3;
+const char OFF = 4;
  
 // Program variable definitions
 unsigned char LED5Brightness = 125;
@@ -49,6 +51,16 @@ int main(void)
        {
            LED5Brightness -= 1;
        }
+
+       if(button == ON)
+       {
+           LED5Brightness = 255;
+       }
+
+       if(button == OFF)
+       {
+           LED5Brightness = 0;
+       }
  
        // PWM LED5 with current brightness
        pwm_LED5(LED5Brightness);
@@ -70,6 +82,14 @@ unsigned char button_pressed(void)
    else if(SW5 == 0)
    {
        return(DOWN);
+   }
+   else if(SW3 == 0)
+   {
+       return(ON);
+   }
+   else if(SW2 == 0)
+   {
+       return(OFF);
    }
    else
    {
