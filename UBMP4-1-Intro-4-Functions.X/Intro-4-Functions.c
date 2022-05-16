@@ -42,28 +42,28 @@ int main(void)
        // Read up/down buttons and adjust LED5 brightness
        button = button_pressed();
       
-       if(button == UP && LED5Brightness < 255)
+       if(button == 1)
        {
-           LED5Brightness += 1;
+           LED3 = 1;
        }
  
-       if(button == DOWN && LED5Brightness > 0)
+       if(button == 2)
        {
-           LED5Brightness -= 1;
+           LED4 = 1;
        }
 
-       if(button == ON)
+       if(button == 3)
        {
-           LED5Brightness = 255;
+           LED5 = 1;
        }
 
-       if(button == OFF)
+       if(button == 4)
        {
-           LED5Brightness = 0;
+           LED6 = 1;
        }
  
        // PWM LED5 with current brightness
-       pwm_LED5(LED5Brightness);
+       //pwm_LED5(LED5Brightness);
       
        // Activate bootloader if SW1 is pressed.
        if(SW1 == 0)
@@ -75,25 +75,25 @@ int main(void)
  
 unsigned char button_pressed(void)
 {
-   if(SW4 == 0)
+   if(SW2 == 0)
    {
-       return(UP);
-   }
-   else if(SW5 == 0)
-   {
-       return(DOWN);
+       return(1);
    }
    else if(SW3 == 0)
    {
-       return(ON);
+       return(2);
    }
-   else if(SW2 == 0)
+   else if(SW4 == 0)
    {
-       return(OFF);
+       return(3);
+   }
+   else if(SW5 == 0)
+   {
+       return(4);
    }
    else
    {
-       return(noButton);
+       return(0);
    }
 }
  
