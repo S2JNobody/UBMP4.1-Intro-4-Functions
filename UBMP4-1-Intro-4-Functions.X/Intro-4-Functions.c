@@ -31,6 +31,10 @@ unsigned char button;
 unsigned char button_pressed(void);
  
 void pwm_LED5(unsigned char);
+
+void sound_tone(unsigned char);
+
+void bin_to_dec();
  
 int main(void)
 {
@@ -61,6 +65,8 @@ int main(void)
        {
            LED6 = 1;
        }
+
+       sound_tone(button_pressed());
  
        // PWM LED5 with current brightness
        //pwm_LED5(LED5Brightness);
@@ -77,19 +83,19 @@ unsigned char button_pressed(void)
 {
    if(SW2 == 0)
    {
-       return(1);
+       return(500);
    }
    else if(SW3 == 0)
    {
-       return(2);
+       return(700);
    }
    else if(SW4 == 0)
    {
-       return(3);
+       return(900);
    }
    else if(SW5 == 0)
    {
-       return(4);
+       return(1100);
    }
    else
    {
@@ -112,6 +118,13 @@ void pwm_LED5(unsigned char pwmValue)
    {
        LED5 = 0;
    }
+}
+
+void sound_tone(unsigned char period) {
+    BEEPER = 1;
+    for (int i = 0;i < period/2;i++);
+    BEEPER = 0;
+    for (int i = 0;i < period/2;i++);
 }
  
 // Move the function code to here in Program Analysis, step 5.
