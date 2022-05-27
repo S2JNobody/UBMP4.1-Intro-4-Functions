@@ -27,6 +27,7 @@ const char OFF = 4;
 // Program variable definitions
 unsigned char LED5Brightness = 125;
 unsigned char button;
+unsigned char binNum = 0b01110011;
  
 unsigned char button_pressed(void);
  
@@ -34,7 +35,7 @@ void pwm_LED5(unsigned char);
 
 void sound_tone(unsigned char);
 
-void bin_to_dec();
+void bin_to_dec(unsigned char);
  
 int main(void)
 {
@@ -43,33 +44,7 @@ int main(void)
     
    while(1)
     {
-       // Read up/down buttons and adjust LED5 brightness
-       button = button_pressed();
-      
-       if(button == 1)
-       {
-           LED3 = 1;
-       }
- 
-       if(button == 2)
-       {
-           LED4 = 1;
-       }
-
-       if(button == 3)
-       {
-           LED5 = 1;
-       }
-
-       if(button == 4)
-       {
-           LED6 = 1;
-       }
-
-       sound_tone(button_pressed());
- 
-       // PWM LED5 with current brightness
-       //pwm_LED5(LED5Brightness);
+       bin_to_dec(binNum);
       
        // Activate bootloader if SW1 is pressed.
        if(SW1 == 0)
@@ -126,7 +101,43 @@ void sound_tone(unsigned char period) {
     BEEPER = 0;
     for (int i = 0;i < period/2;i++);
 }
- 
+
+void bin_to_dec(unsigned char binNum) {
+    unsigned char hundreds = 0;
+    unsigned char tens = 0;
+    unsigned char ones = 0;
+    while (binNum >= 100) {
+        hundreds++;
+        binNum -= 100;
+    }
+    while (binNum >= 10) {
+        tens++;
+        binNum -= 10;
+    }
+    ones = binNum;
+
+    for (int i = 0;i < hundreds;i++) {
+        LED3 = 1;
+        __delay_ms(150);
+        LED3 = 0;
+        __delay_ms(150);
+    }
+
+    for (int i = 0;i < tens;i++) {
+        LED4 = 1;
+        __delay_ms(150);
+        LED4 = 0;
+        __delay_ms(150);
+    }
+
+    for (int i = 0;i < ones;i++) {
+        LED5 = 1;
+        __delay_ms(150);
+        LED5 = 0;
+        __delay_ms(150);
+    }
+}
+
 // Move the function code to here in Program Analysis, step 5.
  
  
