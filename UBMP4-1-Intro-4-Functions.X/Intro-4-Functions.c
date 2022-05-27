@@ -203,7 +203,7 @@ void pwm_LED5(unsigned char);
 *      and the actual pwm_LED5() function declaration statement later in the
 *      code?
  
-There is no code inside, the function will do nothing, and the parameter has to name, only a type
+There is no code inside, the function will do nothing, and the parameter has no name, only a type
  
 *
 * 6.   Building the program with the added function prototypes should now work
